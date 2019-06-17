@@ -1,0 +1,2610 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema xmlns="urn:us:gov:dod:standard:ssrf:4.0.0"    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"    xmlns:s="urn:us:gov:dod:standard:ssrf:4.0.0"    xmlns:xs="http://www.w3.org/2001/XMLSchema"    elementFormDefault="qualified"    targetNamespace="urn:us:gov:dod:standard:ssrf:4.0.0">
+
+     <xs:include schemaLocation="ssrf_codelist.xsd"/>
+      <xs:include schemaLocation="ssrf_datatype.xsd"/>
+
+          <xs:attributeGroup name="metadata">
+               <xs:attribute name="cls" type="c_ListCCL" use="required" />
+               <xs:attribute name="rmks" type="c_INDEX_LIST" />
+               <xs:attribute name="refs" type="c_INDEX_LIST" />
+               <xs:attribute name="releasability" type="c_S_500" />
+               <xs:attribute name="compartment" type="c_S_100" />
+               <xs:attribute name="quality" type="c_S_250" />
+               <xs:attribute name="recommendedValue" type="c_S_250" />
+               <xs:attribute name="language" type="c_ListULN" />
+          </xs:attributeGroup>
+
+      <xs:complexType name="Common">
+          <xs:attribute name="cls" type="c_ListCCL" use="required" />
+          <xs:attribute name="rmks" type="c_INDEX_LIST" />
+          <xs:attribute name="refs" type="c_INDEX_LIST" />
+          <xs:attribute name="releasability" type="c_S_500" />
+          <xs:attribute name="compartment" type="c_S_100" />
+          <xs:attribute name="quality" type="c_S_250" />
+          <xs:attribute name="recommendedValue" type="c_S_250" />
+          <xs:attribute name="language" type="c_ListULN" />
+          <xs:sequence>
+                     <xs:element name="Serial" type="c_SERIAL" />
+                     <xs:element name="Owner" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="EntryDateTime" type="c_DATETIME_UTC" />
+                     <xs:element name="LastChangeDateTime" type="c_DATETIME_UTC" />
+                     <xs:element name="ModAllowedBy" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="ApprovalVia" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="State" type="c_ListCSU" minOccurs="0" />
+                     <xs:element name="Description" type="c_S_500" minOccurs="0" />
+                     <xs:element name="Redacted" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Visibility" type="Visibility" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="CaseNum" type="CaseNum" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="POCInformation" type="POCInformation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Reference" type="Reference" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Attachment" type="Attachment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Remarks" type="Remarks" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="StatusLog" type="StatusLog" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="SecurityClass" type="SecurityClass" minOccurs="0" maxOccurs="1" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Dossier">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="EffectiveDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Deadline" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="Type" type="c_ListCPJ" />
+                     <xs:element name="DossierStatus" type="c_ListCPK" minOccurs="0" />
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Organisation">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="AlternateName" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Type" type="c_ListCTO" minOccurs="0" />
+                     <xs:element name="ParentOrgRef" type="c_SERIAL" />
+                     <xs:element name="Street" type="c_S_250" minOccurs="0" />
+                     <xs:element name="CityArea" type="c_S_50" minOccurs="0" />
+                     <xs:element name="StateCounty" type="c_S_50" minOccurs="0" />
+                     <xs:element name="PostCode" type="c_S_20" minOccurs="0" />
+                     <xs:element name="Country" type="c_ListCAO" />
+                     <xs:element name="AddressDescr" type="c_S_100" minOccurs="0" />
+                     <xs:element name="UIC" type="c_S_20" minOccurs="0" />
+                     <xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Contact" type="Contact" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="ForceStructure">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Element" type="Element" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Location">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="Street" type="c_S_250" minOccurs="0" />
+                     <xs:element name="CityArea" type="c_S_50" minOccurs="0" />
+                     <xs:element name="StateCounty" type="c_S_50" minOccurs="0" />
+                     <xs:element name="PostCode" type="c_S_20" minOccurs="0" />
+                     <xs:element name="Country" type="c_ListCAO" />
+                     <xs:element name="TerrainElevation" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="MapLayer" type="c_S_50" minOccurs="0" />
+                     <xs:element name="GMLDescr" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="Point" type="Point" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Ellipse" type="Ellipse" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="TOA">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Administration" type="c_S_50" />
+                     <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                     <xs:element name="EffectiveDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Footnote" type="Footnote" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Country" type="Country" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="FreqBand" type="FreqBand" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="SignalDescr">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="NecessaryBandwidth" type="c_UN_16_9" />
+                     <xs:element name="EmsClass" type="c_EMSCLASS" />
+                     <xs:element name="Power" type="Power" minOccurs="1" maxOccurs="1" ></xs:element>
+                     <xs:element name="SignalTuning" type="SignalTuning" minOccurs="1" maxOccurs="1" ></xs:element>
+                     <xs:element name="DigitalMod" type="DigitalMod" minOccurs="0" maxOccurs="1" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Transmitter">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Generic" type="c_ListCBO" />
+                     <xs:element name="DuplexSep" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="DuplexSepType" type="c_ListCDS" minOccurs="0" />
+                     <xs:element name="Filter" type="c_S_250" minOccurs="0" />
+                     <xs:element name="PreEmphasis" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="OutputDevice" type="c_S_50" minOccurs="0" />
+                     <xs:element name="OutputDeviceType" type="c_ListUOT" minOccurs="0" />
+                     <xs:element name="TSPR" type="c_S_10" minOccurs="0" />
+                     <xs:element name="FCCAcceptanceNum" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Approved" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Proxy" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Length" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Width" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Height" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Deployment" type="Deployment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Curve" type="Curve" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="TxMode" type="TxMode" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="UsingCountries" type="UsingCountries" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="SpectrumSharing" type="SpectrumSharing" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Receiver">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="IsHomodyne" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Generic" type="c_ListCBO" />
+                     <xs:element name="DuplexSep" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="DuplexSepType" type="c_ListCDS" minOccurs="0" />
+                     <xs:element name="PreSelectionType" type="c_S_100" minOccurs="0" />
+                     <xs:element name="DeEmphasis" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="ConductedEmissions" type="c_SN_6_3" minOccurs="0" />
+                     <xs:element name="RadiatedEmissions" type="c_SN_10_7" minOccurs="0" />
+                     <xs:element name="TSPR" type="c_S_10" minOccurs="0" />
+                     <xs:element name="FCCAcceptanceNum" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Approved" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Proxy" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Length" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Width" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Height" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Deployment" type="Deployment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Curve" type="Curve" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="RxMode" type="RxMode" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="UsingCountries" type="UsingCountries" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="SpectrumSharing" type="SpectrumSharing" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="AntPattern">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Generic" type="c_ListCBO" />
+                     <xs:element name="PatternView" type="PatternView" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Antenna">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="AntType" type="c_ListCAT" />
+                     <xs:element name="Generic" type="c_ListCBO" />
+                     <xs:element name="AntCategory" type="c_ListUAN" minOccurs="0" />
+                     <xs:element name="Shape" type="c_ListCRS" minOccurs="0" />
+                     <xs:element name="Diameter" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="HorzDimension" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="VertDimension" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Approved" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Proxy" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="AntMode" type="AntMode" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="AntHardware" type="AntHardware" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="UsingCountries" type="UsingCountries" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="SpectrumSharing" type="SpectrumSharing" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="RFSystem">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Emergency" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="FieldedStatus" type="c_ListCSG" minOccurs="0" />
+                     <xs:element name="InitialCost" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Length" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Width" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Height" type="c_SN_7_2" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Deployment" type="Deployment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Configuration" type="Configuration" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="StockNum" type="StockNum" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="UsingCountries" type="UsingCountries" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="SpectrumSharing" type="SpectrumSharing" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="SSRequest">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" />
+                     <xs:element name="AddressFrom" type="c_S_500" minOccurs="0" />
+                     <xs:element name="AddressTo" type="c_S_500" minOccurs="0" />
+                     <xs:element name="CurrentStage" type="c_ListCSG" minOccurs="0" />
+                     <xs:element name="Requirement" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="NumMobileUnits" type="c_UN_9" minOccurs="0" />
+                     <xs:element name="NumAreaUnits" type="c_UN_9" minOccurs="0" />
+                     <xs:element name="NumCositedUnits" type="c_UN_9" minOccurs="0" />
+                     <xs:element name="ReplacementInfo" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="ApplicationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ResponseRequiredDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Emergency" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="ApplicationSPSNum" type="c_S_20" minOccurs="0" />
+                     <xs:element name="CoordinationNum" type="c_S_50" minOccurs="0" />
+                     <xs:element name="InfoTransferRequirement" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="InitialCost" type="c_S_100" minOccurs="0" />
+                     <xs:element name="InitialCostDescr" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="ITUWaiver" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="NSEPUse" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="NTIACoordinationRequired" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="NTIASpaceData" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="OperInvIntent" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="OriginatingAgency" type="c_S_100" minOccurs="0" />
+                     <xs:element name="RequestType" type="c_S_50" minOccurs="0" />
+                     <xs:element name="RelatedAnalysisAndTestData" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="SysRelationEssential" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="TSPR" type="c_S_10" minOccurs="0" />
+                     <xs:element name="WartimeUse" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="RedBookVersion" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Proxy" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="RelatedSupportability" type="RelatedSupportability" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="HostNation" type="HostNation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="LocationRef" type="LocationRef" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="RFSystemRef" type="RFSystemRef" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="DiagramEndpoint" type="DiagramEndpoint" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="DiagramLine" type="DiagramLine" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Stage" type="Stage" minOccurs="0" maxOccurs="4" ></xs:element>
+                     <xs:element name="Time" type="Time" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Trunking" type="Trunking" minOccurs="0" maxOccurs="1" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="SSReply">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="SSRequestRef" type="c_SERIAL" />
+                     <xs:element name="ReplyingCountry" type="c_ListCAO" />
+                     <xs:element name="SupportabilityCode" type="c_ListCCD" />
+                     <xs:element name="EffectiveDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReceivedByCountryDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ApprovalSPSNum" type="c_S_20" minOccurs="0" />
+                     <xs:element name="ERPNumber" type="c_S_50" minOccurs="0" />
+                     <xs:element name="FASNumber" type="c_S_50" minOccurs="0" />
+                     <xs:element name="IRACNumber" type="c_S_50" minOccurs="0" />
+                     <xs:element name="ReplyingAuthority" type="c_S_100" minOccurs="0" />
+                     <xs:element name="DistributionGroups" type="c_S_20" minOccurs="0" />
+                     <xs:element name="CoordinationNum" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Approved" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="RedBookVersion" type="c_S_50" minOccurs="0" />
+                     <xs:element name="CommentSource" type="CommentSource" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="StageLocation" type="StageLocation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="HostRestriction" type="HostRestriction" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Allotment">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                     <xs:element name="EffectiveDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="ResponseRequiredDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="UsageType" type="c_ListCUT" minOccurs="0" />
+                     <xs:element name="ConditionalLocation" type="ConditionalLocation" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Section" type="Section" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Assignment">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                     <xs:element name="ResponseRequiredDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="EffectiveDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="ExpirationDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="WeeklyUse" type="c_ListCTH" minOccurs="0" />
+                     <xs:element name="DailyUse" type="c_ListCTI" minOccurs="0" />
+                     <xs:element name="PeriodPercent" type="c_UN_6_3_100" minOccurs="0" />
+                     <xs:element name="Processing" type="c_ListCPI" minOccurs="0" />
+                     <xs:element name="AssignmentAuthority" type="c_ListCHN" minOccurs="0" />
+                     <xs:element name="Requirement" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="UnclassDataAlert" type="c_S_100" minOccurs="0" />
+                     <xs:element name="ServiceType" type="c_ListUTY" minOccurs="0" />
+                     <xs:element name="NATOPoolType" type="c_ListUPF" minOccurs="0" />
+                     <xs:element name="NATOPoolNum" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="CircuitUsage" type="c_ListUUC" minOccurs="0" />
+                     <xs:element name="Emission" type="Emission" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Station" type="Station" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Tuning" type="Tuning" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Link" type="Link" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="AuthArea" type="AuthArea" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="AuthState" type="AuthState" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="CommentNote" type="CommentNote" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="MobileStationSys" type="MobileStationSys" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Pulse" type="Pulse" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="IntfReport">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="LocalEventID" type="c_S_20" minOccurs="0" />
+                     <xs:element name="HelpRequired" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="IntfPeriod" type="c_ListCTI" minOccurs="0" />
+                     <xs:element name="IntfStartDateTime" type="c_DATETIME_UTC" />
+                     <xs:element name="IntfStopDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="AffectedEquipment" type="c_S_100" minOccurs="0" />
+                     <xs:element name="IntfDescr" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="AffectedCSA" type="c_ListUAG" minOccurs="0" />
+                     <xs:element name="Characteristics" type="c_ListUCH" minOccurs="0" />
+                     <xs:element name="GPSAffected" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="NetCircuitsAffected" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="NetsAffected" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="SourceFieldStrength" type="c_UN_6_3" minOccurs="0" />
+                     <xs:element name="SourceLon" type="c_LONGITUDE" minOccurs="0" />
+                     <xs:element name="SourceLat" type="c_LATITUDE" minOccurs="0" />
+                     <xs:element name="SourceAz" type="c_UN_6_3_360" minOccurs="0" />
+                     <xs:element name="SourceLocDescr" type="c_S_250" minOccurs="0" />
+                     <xs:element name="SourceFreqMin" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="SourceFreqMax" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="SourceEmsClass" type="c_EMSCLASS" minOccurs="0" />
+                     <xs:element name="SourceEmsBandwidth" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="VictimAsgnRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="VictimSystem" type="c_S_100" minOccurs="0" />
+                     <xs:element name="VictimCountry" type="c_ListCAO" minOccurs="0" />
+                     <xs:element name="VictimLon" type="c_LONGITUDE" minOccurs="0" />
+                     <xs:element name="VictimLat" type="c_LATITUDE" minOccurs="0" />
+                     <xs:element name="VictimLocDescr" type="c_S_250" minOccurs="0" />
+                     <xs:element name="VictimFreqMin" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="VictimFreqMax" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="SatelliteName" type="c_S_50" minOccurs="0" />
+                     <xs:element name="SatelliteChannel" type="c_S_50" minOccurs="0" />
+                     <xs:element name="SatelliteUplinkFreq" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="SATCOMPriority" type="c_ListUPR" minOccurs="0" />
+                     <xs:element name="SatelliteAffected" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="SatelliteHemisphere" type="c_ListUCO" minOccurs="0" />
+                     <xs:element name="SatelliteLongitude" type="c_LONGITUDE" minOccurs="0" />
+                     <xs:element name="SatelliteTransponderID" type="c_S_50" minOccurs="0" />
+                     <xs:element name="SatelliteUplinkPolarisation" type="c_ListCPO" minOccurs="0" />
+                     <xs:element name="SatelliteDownlinkPolarisation" type="c_ListCPO" minOccurs="0" />
+                     <xs:element name="PerformanceEffects" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="Evaluation" type="c_ListCJ1" minOccurs="0" />
+                     <xs:element name="Solution" type="c_MEMO" minOccurs="0" />
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="JRFL">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="EffectiveDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="ExpirationDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="JRFLEntry" type="JRFLEntry" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Satellite">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="InternationalDesignator" type="c_S_20" minOccurs="0" />
+                     <xs:element name="Administration" type="c_S_100" minOccurs="0" />
+                     <xs:element name="ObjectNum" type="c_S_20" minOccurs="0" />
+                     <xs:element name="NetworkName" type="c_S_50" minOccurs="0" />
+                     <xs:element name="CallSign" type="c_S_20" minOccurs="0" />
+                     <xs:element name="OrbitType" type="c_ListUSP" minOccurs="0" />
+                     <xs:element name="LaunchDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="LaunchLocRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="LaunchLocDescr" type="c_S_100" minOccurs="0" />
+                     <xs:element name="LaunchStatus" type="c_ListULS" minOccurs="0" />
+                     <xs:element name="GeoAltitude" type="c_UN_9_4" minOccurs="0" />
+                     <xs:element name="GeoNominalLon" type="c_LONGITUDE" minOccurs="0" />
+                     <xs:element name="NonGeoPeriod" type="c_UN_12_3" minOccurs="0" />
+                     <xs:element name="NonGeoApogee" type="c_UN_9_4" minOccurs="0" />
+                     <xs:element name="NonGeoPerigee" type="c_UN_9_4" minOccurs="0" />
+                     <xs:element name="NonGeoInclination" type="c_SN_6_3_90" minOccurs="0" />
+                     <xs:element name="NonGeoNumSatellites" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="ReviewDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="ServiceArea" type="ServiceArea" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="EarthStation" type="EarthStation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="CollectedSignal">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="CollectionName" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Notation" type="Notation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="TxCollection" type="TxCollection" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="AntCollection" type="AntCollection" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="Loadset">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Mission" type="c_S_100" minOccurs="0" />
+                     <xs:element name="PrimaryFirmware" type="c_S_50" minOccurs="0" />
+                     <xs:element name="SecondaryFirmware" type="c_S_50" minOccurs="0" />
+                     <xs:element name="MaxActiveFrames" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="MaxReactiveFrames" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="Software" type="c_S_50" minOccurs="0" />
+                     <xs:element name="ResetProcedure" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="KeyLoadProcedure" type="c_MEMO" minOccurs="0" />
+                     <xs:element name="JammingChannelProfile" type="JammingChannelProfile" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="RadiationPlan">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Version" type="c_S_10" minOccurs="0" />
+                     <xs:element name="JCALevel" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="FreqMin" type="c_UN_16_9" />
+                     <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                     <xs:element name="StartDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="StopDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                     <xs:element name="LocationRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="JammingAuthority" type="JammingAuthority" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="JammingPlan" type="JammingPlan" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="FEDeployment">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="FERef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="Type" type="c_ListUFD" minOccurs="0" />
+                     <xs:element name="Num" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="DaysOfMonth" type="c_S_100" minOccurs="0" />
+                     <xs:element name="DaysOfWeek" type="c_S_20" minOccurs="0" />
+                     <xs:element name="Duration" type="c_UN_6" minOccurs="0" />
+                     <xs:element name="Years" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Hours" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Minutes" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Seconds" type="c_S_100" minOccurs="0" />
+                     <xs:element name="Months" type="c_S_50" minOccurs="0" />
+                     <xs:element name="Route" type="Route" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="ForceElement">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Type" type="c_ListUFE" minOccurs="0" />
+                     <xs:element name="UIC" type="c_S_20" minOccurs="0" />
+                     <xs:element name="CmdLevel" type="c_ListULC" minOccurs="0" />
+                     <xs:element name="MissionCode" type="c_ListUMC" minOccurs="0" />
+                     <xs:element name="OwningCountry" type="c_ListCAO" minOccurs="0" />
+                     <xs:element name="ParentRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="Platform" type="c_ListUET" minOccurs="0" />
+                     <xs:element name="FEDeploymentRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="Nomenclature" type="Nomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="Asset" type="Asset" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="StockNum" type="StockNum" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+                     <xs:element name="CrossSection" type="CrossSection" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+      <xs:complexType name="JCEOI">
+           <xs:extension base="Common">
+                <xs:sequence>
+                     <xs:element name="Name" type="c_S_50" />
+                     <xs:element name="Version" type="c_UN_3_1" minOccurs="0" />
+                     <xs:element name="Edition" type="c_S_5" minOccurs="0" />
+                     <xs:element name="StartDateTime" type="c_DATETIME_UTC" />
+                     <xs:element name="StopDateTime" type="c_DATETIME_UTC" />
+                     <xs:element name="FERef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="JRFLRef" type="c_SERIAL" minOccurs="0" />
+                     <xs:element name="Approved" type="c_ListCBO" minOccurs="0" />
+                     <xs:element name="TimePeriod" type="TimePeriod" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               </xs:sequence>
+          </xs:extension>
+      </xs:complexType>
+
+
+      <xs:complexType name="CaseNum">
+           <xs:sequence>
+                <xs:element name="Country" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="Type" type="c_S_25" minOccurs="0" />
+                <xs:element name="Identifier" type="c_S_100" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="POCInformation">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCCI" />
+                <xs:element name="Serial" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="TitleRank" type="c_S_50" minOccurs="0" />
+                <xs:element name="FirstName" type="c_S_50" minOccurs="0" />
+                <xs:element name="Name" type="c_S_50" minOccurs="0" />
+                <xs:element name="OrgName" type="c_S_50" minOccurs="0" />
+               <xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Attachment">
+           <xs:sequence>
+                <xs:element name="DocumentCls" type="c_ListCCL" />
+                <xs:element name="FileName" type="c_S_250" minOccurs="0" />
+                <xs:element name="URL" type="c_S_250" minOccurs="0" />
+                <xs:element name="Folder" type="c_S_50" minOccurs="0" />
+                <xs:element name="Date" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="Title" type="c_S_250" minOccurs="0" />
+                <xs:element name="Type" type="c_ListURE" />
+                <xs:element name="Author" type="c_S_250" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Remarks">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" use="required" />
+                <xs:element name="Author" type="c_S_250" minOccurs="0" />
+                <xs:element name="Date" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="Comment" type="c_MEMO" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="StatusLog">
+           <xs:sequence>
+                <xs:element name="State" type="c_ListCST" minOccurs="0" />
+                <xs:element name="LogEntryRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="AgencyCode" type="c_S_100" minOccurs="0" />
+                <xs:element name="LogEntryPOC" type="c_S_250" minOccurs="0" />
+                <xs:element name="DateTime" type="c_DATETIME_UTC" />
+                <xs:element name="Comment" type="c_S_250" minOccurs="0" />
+                <xs:element name="BPStepDescr" type="c_S_50" minOccurs="0" />
+                <xs:element name="BPStepID" type="c_S_10" minOccurs="0" />
+                <xs:element name="BPData" type="c_MEMO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SecurityClass">
+           <xs:sequence>
+                <xs:element name="ClsAuthority" type="c_S_100" minOccurs="0" />
+                <xs:element name="ClsOrg" type="c_S_100" minOccurs="0" />
+                <xs:element name="DeclsEvent" type="c_S_50" minOccurs="0" />
+                <xs:element name="ClsReason" type="c_ListUCR" minOccurs="0" />
+                <xs:element name="DeclsDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="DeclsType" type="c_S_10" minOccurs="0" />
+                <xs:element name="SourceClsDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+               <xs:element name="ClsDerived" type="ClsDerived" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Compartment" type="Compartment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Downgrade" type="Downgrade" minOccurs="0" maxOccurs="3" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Telephone">
+           <xs:sequence>
+                <xs:element name="Type" type="c_S_20" minOccurs="0" />
+                <xs:element name="MaxCls" type="c_ListCCL" minOccurs="0" />
+                <xs:element name="Number" type="c_S_50" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Email">
+           <xs:sequence>
+                <xs:element name="Type" type="c_S_20" minOccurs="0" />
+                <xs:element name="MaxCls" type="c_ListCCL" minOccurs="0" />
+                <xs:element name="Address" type="c_S_250" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Contact">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCCI" />
+                <xs:element name="TitleRank" type="c_S_50" minOccurs="0" />
+                <xs:element name="FirstName" type="c_S_50" minOccurs="0" />
+                <xs:element name="Name" type="c_S_50" />
+               <xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Element">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" />
+                <xs:element name="ParentIdx" type="c_UN_6" minOccurs="0" />
+                <xs:element name="EltCode" type="c_S_10" minOccurs="0" />
+                <xs:element name="EltName" type="c_S_100" minOccurs="0" />
+                <xs:element name="OrgRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="Country" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="NTM" type="c_UN_6" minOccurs="0" />
+                <xs:element name="JoinStartDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="JoinEndDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="Priority" type="c_UN_6" minOccurs="0" />
+                <xs:element name="Details" type="c_MEMO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Point">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" use="required" />
+                <xs:element name="Lon" type="c_LONGITUDE" />
+                <xs:element name="Lat" type="c_LATITUDE" />
+                <xs:element name="Radius" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="TerrainElevation" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Ellipse">
+           <xs:sequence>
+                <xs:element name="Lon" type="c_LONGITUDE" />
+                <xs:element name="Lat" type="c_LATITUDE" />
+                <xs:element name="SemiMajorAxis" type="c_UN_10_4" />
+                <xs:element name="Azimuth" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="RelativeOrientation" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Footnote">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" use="required" />
+                <xs:element name="FootnoteType" type="c_ListCTA" />
+                <xs:element name="SubType" type="c_S_50" minOccurs="0" />
+                <xs:element name="Identifier" type="c_S_100" />
+                <xs:element name="Text" type="c_MEMO" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Country">
+           <xs:simpleContent>
+                <xs:extension base="ListCAO">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+      </xs:complexType>
+
+      <xs:complexType name="FreqBand">
+           <xs:sequence>
+               <xs:attribute name="footnotes" type="c_INDEX_LIST" />
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="UseIndicator" type="c_S_50" minOccurs="0" />
+                <xs:element name="Justification" type="c_MEMO" minOccurs="0" />
+               <xs:element name="Allocation" type="Allocation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Power">
+           <xs:sequence>
+                <xs:element name="PowerMin" type="c_SN_10_7" />
+                <xs:element name="PowerMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+                <xs:element name="PowerCalculated" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SignalTuning">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="TuningStep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ChannelSpacing" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumPresetChannels" type="c_UN_9" minOccurs="0" />
+                <xs:element name="LowestUsableChannel" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumFreqsRequired" type="c_UN_9" minOccurs="0" />
+                <xs:element name="MinSeparation" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="DigitalMod">
+           <xs:sequence>
+                <xs:element name="DigitalModType" type="c_ListCMO" minOccurs="0" />
+                <xs:element name="MaxBitRate" type="c_UN_12_3" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TxMode">
+           <xs:sequence>
+               <xs:attribute name="curves" type="c_INDEX_LIST" />
+                <xs:element name="ModeID" type="c_S_20" />
+                <xs:element name="ModeName" type="c_S_50" minOccurs="0" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="SignalDescrRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="EmsClass" type="c_EMSCLASS" minOccurs="0" />
+                <xs:element name="NecessaryBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Tunability" type="c_ListCTU" minOccurs="0" />
+                <xs:element name="OccBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="OccBandwidthCalculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="SecondHarmonicLevel" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="ThirdHarmonicLevel" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="OtherHarmonicLevel" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="SpuriousLevel" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="ModulationType" type="c_ListUMD" minOccurs="0" />
+                <xs:element name="JitterCapable" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="RadarType" type="c_ListCRA" minOccurs="0" />
+                <xs:element name="PulseSystemsChartProvided" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="TuningMethod" type="c_ListUTN" minOccurs="0" />
+                <xs:element name="FreqTolerance" type="c_UN_18_6" minOccurs="0" />
+                <xs:element name="FreqToleranceUnit" type="c_ListUFO" minOccurs="0" />
+                <xs:element name="BurstDuration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="BurstRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="BurstOffTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="BurstNumPulses" type="c_UN_9" minOccurs="0" />
+                <xs:element name="ChannelDwell" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="IntermodEffect" type="c_MEMO" minOccurs="0" />
+                <xs:element name="IntermodPct" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="NumSideTones" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumSubCarriers" type="c_UN_6" minOccurs="0" />
+                <xs:element name="GpsNBL1Level" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="GpsWBL1Level" type="c_SN_10_7" minOccurs="0" />
+               <xs:element name="Power" type="Power" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="SignalTuning" type="SignalTuning" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="TxModulation" type="TxModulation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Pulse" type="Pulse" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="SpreadSpectrum" type="SpreadSpectrum" minOccurs="0" maxOccurs="1" ></xs:element>
+               <xs:element name="Baseband" type="Baseband" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="SubcarrierFreq" type="SubcarrierFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="UsingCountries">
+           <xs:sequence>
+                <xs:element name="Country" type="c_ListCAO" />
+                <xs:element name="CountryRole" type="c_ListUS2" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Deployment">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCIN" />
+               <xs:element name="Installation" type="Installation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Curve">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" use="required" />
+                <xs:element name="Type" type="c_ListCCT" />
+                <xs:element name="Calculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="FreqFactor" type="c_UN_6_3" />
+                <xs:element name="FreqConst" type="c_SN_16_9" />
+                <xs:element name="Bandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+               <xs:element name="CurvePoint" type="CurvePoint" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="RxMode">
+           <xs:sequence>
+               <xs:attribute name="curves" type="c_INDEX_LIST" />
+                <xs:element name="ModeID" type="c_S_20" />
+                <xs:element name="ModeName" type="c_S_50" minOccurs="0" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="SignalDescrRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="RxType" type="c_ListCRT" minOccurs="0" />
+                <xs:element name="EmsClass" type="c_EMSCLASS" minOccurs="0" />
+                <xs:element name="NecessaryBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Tunability" type="c_ListCTU" minOccurs="0" />
+                <xs:element name="SensitivityLevel" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="NoiseFigure" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="NoiseTemp" type="c_UN_10_4" minOccurs="0" />
+                <xs:element name="SensitivityCriteriaType" type="c_ListCSE" minOccurs="0" />
+                <xs:element name="SensitivityCriteriaLevel" type="c_double" minOccurs="0" />
+                <xs:element name="SensitivityCriteriaText" type="c_S_50" minOccurs="0" />
+                <xs:element name="SensitivityThreshold" type="c_ListUTH" minOccurs="0" />
+                <xs:element name="SignalToNoise" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="TuningMethod" type="c_ListUTN" minOccurs="0" />
+                <xs:element name="FreqTolerance" type="c_UN_18_6" minOccurs="0" />
+                <xs:element name="FreqToleranceUnit" type="c_ListUFO" minOccurs="0" />
+                <xs:element name="AdjacentChannelSelectivity" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="SaturationLevel" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="DynamicRange" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="ImageRejection" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="IntermodEffect" type="c_MEMO" minOccurs="0" />
+                <xs:element name="IntermodPct" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="IntermodRejection" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="SpuriousRejection" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="PostDetectionFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PostDetectionFreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ProcessingGainMin" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="ProcessingGainMax" type="c_SN_6_3" minOccurs="0" />
+               <xs:element name="SignalTuning" type="SignalTuning" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="RxModulation" type="RxModulation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="FreqConversion" type="FreqConversion" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="SpreadSpectrum" type="SpreadSpectrum" minOccurs="0" maxOccurs="1" ></xs:element>
+               <xs:element name="Baseband" type="Baseband" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PatternView">
+           <xs:sequence>
+                <xs:element name="Calculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="CutType" type="c_ListCTP" minOccurs="0" />
+                <xs:element name="CutAngle" type="c_UN_6_3_180" minOccurs="0" />
+               <xs:element name="PatternPoint" type="PatternPoint" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Nomenclature">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCTO" minOccurs="0" />
+                <xs:element name="Level" type="c_ListCNU" minOccurs="0" />
+                <xs:element name="Name" type="c_S_100" />
+                <xs:element name="PhysicalUsage" type="c_ListUS5" minOccurs="0" />
+               <xs:element name="Manufacturer" type="Manufacturer" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntMode">
+           <xs:sequence>
+                <xs:element name="ModeID" type="c_S_20" />
+                <xs:element name="ModeName" type="c_S_50" minOccurs="0" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="BeamType" type="c_ListUBD" minOccurs="0" />
+                <xs:element name="AntPatternRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="ModeUse" type="c_ListCAU" minOccurs="0" />
+                <xs:element name="MotionType" type="c_ListCAD" minOccurs="0" />
+                <xs:element name="SectBlanking" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="PolarisationType" type="c_ListCPO" minOccurs="0" />
+                <xs:element name="PolarisationAngle" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="HorzScanSpeed" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="HorzScanRate" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="HorzScanType" type="c_ListCAS" minOccurs="0" />
+                <xs:element name="HorzScanSector" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="VertScanSpeed" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="VertScanRate" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="VertScanType" type="c_ListCAS" minOccurs="0" />
+                <xs:element name="VertScanAngleMin" type="c_SN_6_3_180" minOccurs="0" />
+                <xs:element name="VertScanAngleMax" type="c_SN_6_3_180" minOccurs="0" />
+                <xs:element name="RotationDirection" type="c_ListCRD" minOccurs="0" />
+                <xs:element name="RotationRateMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="RotationRateMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="HorzBeamwidthMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="HorzBeamwidthMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="VertBeamwidthMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="VertBeamwidthMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MaxPower" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="HorzSidelobeSuppressed" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="HorzSidelobeAz" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="HorzSidelobeAttenuation" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="VertSidelobeSuppressed" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="VertSidelobeElev" type="c_SN_6_3_180" minOccurs="0" />
+                <xs:element name="VertSidelobeAttenuation" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="PortIsolation" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="ApertureEffectiveDiameter" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ApertureEffectiveHorzSize" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PhArrayNumElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PhArrayNumMainBeams" type="c_UN_6" minOccurs="0" />
+               <xs:element name="AntGain" type="AntGain" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="AntFreqs" type="AntFreqs" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="VSWR" type="VSWR" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntHardware">
+           <xs:sequence>
+                <xs:element name="ConnectorType" type="c_ListUCN" minOccurs="0" />
+                <xs:element name="FeedType" type="c_ListUAF" minOccurs="0" />
+                <xs:element name="FeedOrientation" type="c_S_10" minOccurs="0" />
+                <xs:element name="LeadType" type="c_ListUAL" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SpectrumSharing">
+           <xs:sequence>
+                <xs:element name="Enabled" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="ControlType" type="c_ListUCT" minOccurs="0" />
+                <xs:element name="Method" type="c_ListUSH" minOccurs="0" />
+               <xs:element name="PolicyType" type="PolicyType" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ThisSystem" type="ThisSystem" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="OtherSystems" type="OtherSystems" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="LockoutFreq" type="LockoutFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Deployment">
+           <xs:sequence>
+
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Configuration">
+           <xs:sequence>
+                <xs:element name="ConfigID" type="c_S_100" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="EIRPMin" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="EIRPMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="EIRPCalculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="NumUsers" type="c_UN_9" minOccurs="0" />
+                <xs:element name="OOBJustification" type="c_MEMO" minOccurs="0" />
+                <xs:element name="SpectrumLink" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="PowerLimit" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+                <xs:element name="ConfigUse" type="c_ListCAU" minOccurs="0" />
+               <xs:element name="EqpFnct" type="EqpFnct" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ConfigEqp" type="ConfigEqp" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ConfigFreq" type="ConfigFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Notation" type="Notation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Usage" type="Usage" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ConfigEmission" type="ConfigEmission" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="CrossSectionRange" type="CrossSectionRange" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Vulnerability" type="Vulnerability" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="StockNum">
+           <xs:sequence>
+                <xs:element name="StockNum" type="c_S_50" />
+                <xs:element name="Type" type="c_ListUNS" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="RelatedSupportability">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCDD" />
+                <xs:element name="SSRequestRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="J12Number" type="c_S_20" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="HostNation">
+           <xs:simpleContent>
+                <xs:extension base="ListCAO">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+      </xs:complexType>
+
+      <xs:complexType name="LocationRef">
+           <xs:simpleContent>
+                <xs:extension base="SERIAL">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+      </xs:complexType>
+
+      <xs:complexType name="RFSystemRef">
+           <xs:simpleContent>
+                <xs:extension base="SERIAL">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+      </xs:complexType>
+
+      <xs:complexType name="DiagramEndpoint">
+           <xs:sequence>
+                <xs:element name="EndpointID" type="c_S_20" />
+                <xs:element name="IconType" type="c_ListUIC" />
+                <xs:element name="Name" type="c_S_20" minOccurs="0" />
+                <xs:element name="Description" type="c_S_100" minOccurs="0" />
+                <xs:element name="IconPosLeft" type="c_UN_6" minOccurs="0" />
+                <xs:element name="IconPosTop" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PointToMultiPoint" type="c_ListCBO" minOccurs="0" />
+               <xs:element name="EndpointLocation" type="EndpointLocation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="DiagramLine">
+           <xs:sequence>
+                <xs:element name="RxEndpointID" type="c_S_20" />
+                <xs:element name="TxEndpointID" type="c_S_20" />
+                <xs:element name="ConfigID" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Stage">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCSG" />
+                <xs:element name="ApprovalRequiredDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="StartDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="TargetDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="TerminationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="NumEquip" type="c_UN_9" minOccurs="0" />
+                <xs:element name="GeoDescription" type="c_MEMO" minOccurs="0" />
+               <xs:element name="StageLocation" type="StageLocation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Time">
+           <xs:sequence>
+                <xs:element name="Period" type="c_ListCTI" minOccurs="0" />
+                <xs:element name="UsageDescription" type="c_MEMO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Trunking">
+           <xs:sequence>
+                <xs:element name="IsTrunking" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumFreqsRequired" type="c_UN_12" minOccurs="0" />
+                <xs:element name="NumRepeaters" type="c_UN_9" minOccurs="0" />
+                <xs:element name="NumUsers" type="c_UN_12" minOccurs="0" />
+                <xs:element name="ControlChannel" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Dispatcher" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="DispatcherExplanation" type="c_MEMO" minOccurs="0" />
+                <xs:element name="RequestForExpansion" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="ExpansionTargetDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="EstimatedExpansionCost" type="c_S_100" minOccurs="0" />
+                <xs:element name="AdditionalChannelsRationale" type="c_MEMO" minOccurs="0" />
+                <xs:element name="PreviousSPSDocketNum" type="c_S_20" minOccurs="0" />
+                <xs:element name="SeparateSystemJustification" type="c_MEMO" minOccurs="0" />
+               <xs:element name="TrunkingAssignment" type="TrunkingAssignment" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CommentSource">
+           <xs:sequence>
+                <xs:element name="Source" type="c_S_100" minOccurs="0" />
+                <xs:element name="Author" type="c_S_100" minOccurs="0" />
+                <xs:element name="JobTitle" type="c_S_100" minOccurs="0" />
+                <xs:element name="Date" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="Comment" type="c_MEMO" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="StageLocation">
+           <xs:sequence>
+                <xs:element name="LocSatRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="CityArea" type="c_S_50" minOccurs="0" />
+                <xs:element name="StateCounty" type="c_S_50" minOccurs="0" />
+                <xs:element name="Country" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="HostRestriction">
+           <xs:sequence>
+                <xs:element name="RFSystemRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="ConfigID" type="c_S_100" minOccurs="0" />
+                <xs:element name="EIRPMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerLimit" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+               <xs:element name="ConfigFreq" type="ConfigFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Usage" type="Usage" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ConditionalLocation">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" use="required" />
+                <xs:element name="Condition" type="c_ListCCC" />
+                <xs:element name="LocationRef" type="c_SERIAL" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Section">
+           <xs:sequence>
+               <xs:attribute name="locations" type="c_INDEX_LIST" />
+                <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="UsingAgency" type="c_S_50" minOccurs="0" />
+               <xs:element name="AllotEmission" type="AllotEmission" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="AllotFreq" type="AllotFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="AllotChannel" type="AllotChannel" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Emission">
+           <xs:sequence>
+                <xs:element name="EmissionID" type="c_S_100" />
+                <xs:element name="TxRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="TxModeID" type="c_S_20" minOccurs="0" />
+                <xs:element name="RxRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="RxModeID" type="c_S_20" minOccurs="0" />
+                <xs:element name="NecessaryBandwidth" type="c_UN_16_9" />
+                <xs:element name="EmsClass" type="c_EMSCLASS" />
+                <xs:element name="TxPower" type="c_SN_10_7" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+                <xs:element name="PowerCalculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="EIRP" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="EIRPCalculated" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="StnClass" type="c_ListUSC" minOccurs="0" />
+                <xs:element name="DCSTrunkID" type="c_S_10" minOccurs="0" />
+                <xs:element name="TxCertPrefix" type="c_ListUEC" minOccurs="0" />
+                <xs:element name="TxCertNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="TxCertRevNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="RxCertPrefix" type="c_ListUEC" minOccurs="0" />
+                <xs:element name="RxCertNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="RxCertRevNum" type="c_UN_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Station">
+           <xs:sequence>
+                <xs:element name="StationID" type="c_S_100" />
+                <xs:element name="Description" type="c_S_250" minOccurs="0" />
+                <xs:element name="Repeater" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="CallSign" type="c_S_20" minOccurs="0" />
+                <xs:element name="CositeSep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="CositeSepDescription" type="c_MEMO" minOccurs="0" />
+                <xs:element name="LocationName" type="c_S_100" minOccurs="0" />
+                <xs:element name="LocationCountry" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="LocationRadius" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="LocationRadiusUse" type="c_S_5" minOccurs="0" />
+                <xs:element name="TerrainElevation" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="AntennaElevation" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="StationControl" type="c_S_20" minOccurs="0" />
+                <xs:element name="ITURegion" type="c_UN_6" minOccurs="0" />
+                <xs:element name="InclinationAngle" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="Apogee" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="Perigee" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="Period" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="NumOfSats" type="c_UN_6" minOccurs="0" />
+                <xs:element name="SpectralPowerDensity" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="RadarTunability" type="c_ListCTU" minOccurs="0" />
+                <xs:element name="IntermediateFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="SidelobeSuppressed" type="c_ListCBO" minOccurs="0" />
+               <xs:element name="Point" type="Point" minOccurs="1" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="POCInformation" type="POCInformation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="EqpNomenclature" type="EqpNomenclature" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="AntDetails" type="AntDetails" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Tuning">
+           <xs:sequence>
+                <xs:element name="TuningStep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumFreq" type="c_UN_6" minOccurs="0" />
+                <xs:element name="Priority" type="c_UN_5" minOccurs="0" />
+                <xs:element name="Hopping" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="FreqSep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqSepType" type="c_ListCDS" minOccurs="0" />
+               <xs:element name="RequestedFreq" type="RequestedFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="AsgnFreq" type="AsgnFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Channel" type="Channel" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Link">
+           <xs:sequence>
+                <xs:element name="LinkID" type="c_S_100" />
+                <xs:element name="MajorFunction" type="c_ListCFN" minOccurs="0" />
+                <xs:element name="IntermediateFunction" type="c_ListCFN" minOccurs="0" />
+               <xs:element name="StationRef" type="StationRef" minOccurs="2" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Tuning" type="Tuning" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="DetailedFunction" type="DetailedFunction" minOccurs="0" maxOccurs="5" ></xs:element>
+               <xs:element name="OperatingSchedule" type="OperatingSchedule" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AuthArea">
+           <xs:sequence>
+                <xs:element name="AuthAreaUse" type="c_ListCAU" minOccurs="0" />
+                <xs:element name="AuthAreaDescr" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AuthState">
+           <xs:sequence>
+                <xs:element name="AuthStateUse" type="c_ListCAU" minOccurs="0" />
+                <xs:element name="AuthStateDescr" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CommentNote">
+           <xs:sequence>
+                <xs:element name="Comment" type="c_MEMO" minOccurs="0" />
+                <xs:element name="CommentCountry" type="c_ListUCC" minOccurs="0" />
+                <xs:element name="Identifier" type="c_S_100" minOccurs="0" />
+                <xs:element name="Type" type="c_S_20" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="MobileStationSys">
+           <xs:sequence>
+                <xs:element name="NumOfMobileStations" type="c_UN_6" minOccurs="0" />
+                <xs:element name="SysName" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Pulse">
+           <xs:sequence>
+                <xs:element name="PulseID" type="c_S_100" minOccurs="0" />
+                <xs:element name="PRRMin" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="PRRMax" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="PDMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="DutyCycleMin" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="DutyCycleMax" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="AvgPowerMin" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="AvgPowerMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="RiseTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="JustifyShortRiseTime" type="c_MEMO" minOccurs="0" />
+                <xs:element name="FallTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="FreqDev" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="CompMethod" type="c_S_50" minOccurs="0" />
+                <xs:element name="CompRatio" type="c_UN_10_4" minOccurs="0" />
+                <xs:element name="NumSubpulses" type="c_UN_12" minOccurs="0" />
+                <xs:element name="RadarProcessingGainMax" type="c_SN_6_3" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JRFLEntry">
+           <xs:sequence>
+                <xs:element name="JRFLEntryID" type="c_S_25" minOccurs="0" />
+                <xs:element name="ChangeDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="ProtectionCode" type="c_ListCPC" />
+                <xs:element name="Priority" type="c_S_5" minOccurs="0" />
+                <xs:element name="Justification" type="c_S_250" minOccurs="0" />
+                <xs:element name="ApprovalLevel" type="c_ListCTS" minOccurs="0" />
+                <xs:element name="AsgnAllotRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Bandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqUse" type="c_ListCAU" minOccurs="0" />
+                <xs:element name="PowerMin" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+                <xs:element name="NecessaryBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="EmsClass" type="c_EMSCLASS" minOccurs="0" />
+                <xs:element name="TxLocDescr" type="c_S_100" minOccurs="0" />
+                <xs:element name="TxLon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="TxLat" type="c_LATITUDE" minOccurs="0" />
+                <xs:element name="TxRadius" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="TxAntennaElevation" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="RxLocDescr" type="c_S_100" minOccurs="0" />
+                <xs:element name="RxLon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="RxLat" type="c_LATITUDE" minOccurs="0" />
+                <xs:element name="RxRadius" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="RxAntennaElevation" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="DaysOfMonth" type="c_S_100" minOccurs="0" />
+                <xs:element name="DaysOfWeek" type="c_S_20" minOccurs="0" />
+                <xs:element name="Duration" type="c_UN_6" minOccurs="0" />
+                <xs:element name="Hours" type="c_S_100" minOccurs="0" />
+                <xs:element name="Minutes" type="c_S_100" minOccurs="0" />
+                <xs:element name="Seconds" type="c_S_100" minOccurs="0" />
+                <xs:element name="Months" type="c_S_50" minOccurs="0" />
+                <xs:element name="Years" type="c_S_50" minOccurs="0" />
+               <xs:element name="POCInformation" type="POCInformation" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="LocationRef" type="LocationRef" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ServiceArea">
+           <xs:sequence>
+                <xs:element name="Footprint" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="Description" type="c_S_500" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="EarthStation">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_50" minOccurs="0" />
+                <xs:element name="Type" type="c_ListUEA" minOccurs="0" />
+                <xs:element name="LocationRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="LocationDescr" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Notation">
+           <xs:sequence>
+                <xs:element name="NotationCode" type="c_S_20" />
+                <xs:element name="Type" type="c_ListUEN" minOccurs="0" />
+                <xs:element name="Status" type="c_ListUNT" minOccurs="0" />
+               <xs:element name="NotationTimeline" type="NotationTimeline" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="PotentialVictims" type="PotentialVictims" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="UsingCountries" type="UsingCountries" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TxCollection">
+           <xs:sequence>
+                <xs:element name="TxCollectID" type="c_S_100" />
+                <xs:element name="Description" type="c_S_500" minOccurs="0" />
+                <xs:element name="ObservedDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="Lon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="Lat" type="c_LATITUDE" minOccurs="0" />
+               <xs:element name="ObservedERPAnalysis" type="ObservedERPAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedMOPAnalysis" type="ObservedMOPAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedERPValues" type="ObservedERPValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedMOPSweep" type="ObservedMOPSweep" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedPulseAnalysis" type="ObservedPulseAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedRFAnalysis" type="ObservedRFAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntCollection">
+           <xs:sequence>
+                <xs:element name="AntCollectID" type="c_S_100" />
+                <xs:element name="Description" type="c_S_500" minOccurs="0" />
+                <xs:element name="ObservedDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="Lon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="Lat" type="c_LATITUDE" minOccurs="0" />
+               <xs:element name="ObservedLobeAnalysis" type="ObservedLobeAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedPolarisationAnalysis" type="ObservedPolarisationAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="ObservedScanAnalysis" type="ObservedScanAnalysis" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JammingChannelProfile">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="CarrierWaveform" type="c_S_100" minOccurs="0" />
+                <xs:element name="Signal" type="c_S_100" minOccurs="0" />
+                <xs:element name="ActivationPower" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="ActivationTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="CenterFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ChannelSpacing" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Direction" type="c_ListULD" minOccurs="0" />
+                <xs:element name="Dwell" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ExBlankingOn" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="ObserveTime" type="c_S_16" minOccurs="0" />
+                <xs:element name="OffsetFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RxDuration" type="c_S_16" minOccurs="0" />
+                <xs:element name="TxDuration" type="c_S_16" minOccurs="0" />
+                <xs:element name="Techniques" type="c_UN_6" minOccurs="0" />
+                <xs:element name="Threat" type="c_S_100" minOccurs="0" />
+                <xs:element name="FFTType" type="c_S_20" minOccurs="0" />
+               <xs:element name="TimingDeconflictionProtocol" type="TimingDeconflictionProtocol" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JammingAuthority">
+           <xs:sequence>
+                <xs:element name="JCAState" type="c_ListUWC" minOccurs="0" />
+                <xs:element name="JCALevel" type="c_UN_6" minOccurs="0" />
+                <xs:element name="JCACallSign" type="c_S_10" minOccurs="0" />
+                <xs:element name="JCAFreq" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JammingPlan">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                <xs:element name="Version" type="c_S_10" minOccurs="0" />
+                <xs:element name="StartTrigger" type="c_ListUWF" minOccurs="0" />
+                <xs:element name="StartDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="StartLocRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="StopTrigger" type="c_ListUWF" minOccurs="0" />
+                <xs:element name="StopDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="StopLocRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="Priority" type="c_ListUWE" minOccurs="0" />
+                <xs:element name="NumFreqs" type="c_UN_6" minOccurs="0" />
+                <xs:element name="RequiredEffect" type="c_ListUWA" minOccurs="0" />
+                <xs:element name="RequiredPerformance" type="c_ListUWB" minOccurs="0" />
+                <xs:element name="StandOffDist" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="Level3Auth" type="c_ListCBO" minOccurs="0" />
+               <xs:element name="JammingTarget" type="JammingTarget" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Route">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" />
+                <xs:element name="DateTime" type="c_DATETIME_UTC" minOccurs="0" />
+                <xs:element name="Speed" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="WayPointLon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="WayPointLat" type="c_LATITUDE" minOccurs="0" />
+                <xs:element name="WayPointAltitude" type="c_SN_7_2" minOccurs="0" />
+                <xs:element name="WayPointWidth" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="WayPointDescr" type="c_S_25" minOccurs="0" />
+                <xs:element name="Continuous" type="c_UN_6" minOccurs="0" />
+                <xs:element name="FEDeploymentRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="WayPointLocRef" type="c_SERIAL" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Asset">
+           <xs:sequence>
+               <xs:attribute name="idx" type="c_UN_6" />
+                <xs:element name="ParentIdx" type="c_UN_6" minOccurs="0" />
+                <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                <xs:element name="Description" type="c_S_500" minOccurs="0" />
+                <xs:element name="QtyAuthorised" type="c_UN_9" minOccurs="0" />
+                <xs:element name="QtyAvailable" type="c_UN_9" minOccurs="0" />
+                <xs:element name="AssetRef" type="c_SERIAL" minOccurs="0" />
+               <xs:element name="RouteLoc" type="RouteLoc" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CrossSection">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListURS" minOccurs="0" />
+                <xs:element name="Wavelength" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="EffectiveArea" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="Calculated" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TimePeriod">
+           <xs:sequence>
+                <xs:element name="PeriodID" type="c_UN_6" />
+                <xs:element name="DaysOfMonth" type="c_S_100" minOccurs="0" />
+               <xs:element name="Net" type="Net" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Suffix" type="Suffix" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Expander" type="Expander" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Password" type="Password" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="TacSat" type="TacSat" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Smoke" type="Smoke" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="Pyrotechnics" type="Pyrotechnics" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+     <xs:complexType name="Visibility">
+           <xs:simpleContent>
+                <xs:extension base="SERIAL">
+                     <xs:attributeGroup ref="metadata" />
+                     <xs:attribute name="includeSubordinates" type="ListCBO" use="required" />
+                </xs:extension>
+           </xs:simpleContent>
+      </xs:complexType>
+
+       <xs:complexType name="Reference">
+           <xs:simpleContent>
+                <xs:extension base="SERIAL">
+                     <xs:attributeGroup ref="metadata" />
+                     <xs:attribute name="idx" type="UN_6" use="required" />
+                </xs:extension>
+           </xs:simpleContent>
+      </xs:complexType>
+
+
+      <xs:complexType name="ClsDerived">
+           <xs:sequence>
+                <xs:element name="Date" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="Org" type="c_S_50" minOccurs="0" />
+                <xs:element name="Title" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Compartment">
+           <xs:sequence>
+                <xs:element name="Acronym" type="c_S_50" minOccurs="0" />
+                <xs:element name="FullText" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Downgrade">
+           <xs:sequence>
+                <xs:element name="Date" type="c_DATE_YYYY-MM-DD" />
+                <xs:element name="Downcls" type="c_ListCCL" />
+                <xs:element name="DowngradeInfo" type="c_S_250" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Email">
+           <xs:sequence>
+                <xs:element name="Type" type="c_S_20" minOccurs="0" />
+                <xs:element name="MaxCls" type="c_ListCCL" minOccurs="0" />
+                <xs:element name="Address" type="c_S_250" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Allocation">
+           <xs:sequence>
+               <xs:attribute name="footnotes" type="c_INDEX_LIST" />
+                <xs:element name="AllocatedService" type="c_ListCSN" />
+                <xs:element name="Priority" type="c_ListCPS" />
+                <xs:element name="ServiceQualifier" type="c_S_250" minOccurs="0" />
+                <xs:element name="Exception" type="c_S_50" minOccurs="0" />
+                <xs:element name="EffectiveDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="ExpirationDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+               <xs:element name="StnClass" type="StnClass" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TxModulation">
+           <xs:sequence>
+                <xs:element name="DigitalModType" type="c_ListCMO" minOccurs="0" />
+                <xs:element name="BitDuration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="NumStates" type="c_UN_6" minOccurs="0" />
+                <xs:element name="CodeRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="FMChirpPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="CodePeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MaxBitRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="LineCoding" type="c_ListUDF" minOccurs="0" />
+                <xs:element name="KeysAngle" type="c_UN_6_3_180" minOccurs="0" />
+                <xs:element name="KeysDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="SymbolSize" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MUXLevel" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MUXScheme" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Baseband">
+           <xs:sequence>
+                <xs:element name="ModFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ModFreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="OOKPattern" type="c_S_100" minOccurs="0" />
+                <xs:element name="AMIdx" type="c_UN_5_3" minOccurs="0" />
+                <xs:element name="AMRmsIdx" type="c_UN_5_3" minOccurs="0" />
+                <xs:element name="FMDeviationCode" type="c_ListUFM" minOccurs="0" />
+                <xs:element name="FMPeakFreqDev" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FMRmsFreqDev" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="MaxDevRatio" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="FMPeakModulationIdx" type="c_UN_5_3" minOccurs="0" />
+                <xs:element name="CarrierSuppression" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="SidebandSuppressed" type="c_ListUSI" minOccurs="0" />
+                <xs:element name="SidebandSuppression" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="SignalSequenceDescr" type="c_S_100" minOccurs="0" />
+                <xs:element name="SignalDurationMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="SignalDurationMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="SignalShape" type="c_ListUSS" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SubcarrierFreq">
+           <xs:sequence>
+                <xs:element name="Freq" type="c_UN_16_9" />
+                <xs:element name="FreqOffset" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqRest" type="c_UN_16_9" minOccurs="0" />
+               <xs:element name="SubcarrierTone" type="SubcarrierTone" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Installation">
+           <xs:simpleContent>
+                <xs:extension base="c_S_50">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CurvePoint">
+           <xs:sequence>
+                <xs:element name="Offset" type="c_SN_16_9" />
+                <xs:element name="Level" type="c_SN_6_3" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="RxModulation">
+           <xs:sequence>
+                <xs:element name="DigitalModType" type="c_ListCMO" minOccurs="0" />
+                <xs:element name="BitDuration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="NumStates" type="c_UN_6" minOccurs="0" />
+                <xs:element name="CodeRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="CodePeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MaxBitRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="LineCoding" type="c_ListUDF" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="FreqConversion">
+           <xs:sequence>
+                <xs:element name="StageNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="OscillatorTuning" type="c_ListCLO" minOccurs="0" />
+                <xs:element name="LOFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="LOFreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="IFMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="IFMax" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SpreadSpectrum">
+           <xs:sequence>
+                <xs:element name="IsSpreadSpectrum" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="Type" type="c_ListCSS" minOccurs="0" />
+                <xs:element name="FreqBlocking" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="MaxGain" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="HopRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="HopDwell" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="InfoDataRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="ChipRate" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumFreqsPerHopset" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumHopsets" type="c_UN_6" minOccurs="0" />
+                <xs:element name="TimeHopNumSlots" type="c_UN_6" minOccurs="0" />
+                <xs:element name="TimeHopPulsesPerDwell" type="c_UN_12" minOccurs="0" />
+                <xs:element name="CodeRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="ChirpDurationMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ChirpDurationMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ChirpFreqShift" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ChirpRate" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PatternPoint">
+           <xs:sequence>
+                <xs:element name="Dir" type="c_UN_6_3_360" />
+                <xs:element name="Gain" type="c_SN_6_3" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Manufacturer">
+           <xs:sequence>
+                <xs:element name="Country" type="c_ListCAO" minOccurs="0" />
+                <xs:element name="Name" type="c_S_100" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntGain">
+           <xs:sequence>
+                <xs:element name="Gain" type="c_SN_6_3" />
+                <xs:element name="GainFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FrontToBackRatio" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="BackLobeGain" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="Calculated" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntFreqs">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Bandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Efficiency" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="VSWR">
+           <xs:sequence>
+                <xs:element name="Ratio" type="c_UN_6_3" />
+                <xs:element name="Freq" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PolicyType">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListUPT" />
+                <xs:element name="UpdateMethod" type="c_ListUUM" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ThisSystem">
+           <xs:sequence>
+                <xs:element name="DetectionType" type="c_ListUES" minOccurs="0" />
+                <xs:element name="DetectablePowerMin" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="InterferencePowerThreshold" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="SensorSampleRateMin" type="c_UN_12" minOccurs="0" />
+                <xs:element name="SensorSampleRateMax" type="c_UN_12" minOccurs="0" />
+                <xs:element name="SensorSampleWindowMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="SensorSampleWindowMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="AvailChannelCheckTimeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="AvailChannelCheckTimeMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RecheckWaitTimeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ExitTimeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ShareTimePct" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="OtherSystems">
+           <xs:sequence>
+                <xs:element name="DetectionProbMin" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="DetectablePowerMin" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="WaveformCaptureTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="AvailChannelCheckTimeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RecheckWaitTimeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ExitTimeMax" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="LockoutFreq">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="StdNTIALoad" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="Reason" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Installation">
+           <xs:simpleContent>
+                <xs:extension base="c_S_50">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="EqpFnct">
+           <xs:simpleContent>
+                <xs:extension base="c_ListCEF">
+                     <xs:attributeGroup ref="metadata" />
+                </xs:extension>
+           </xs:simpleContent>
+
+      </xs:complexType>
+
+      <xs:complexType name="ConfigEqp">
+           <xs:sequence>
+                <xs:element name="Serial" type="c_SERIAL" />
+                <xs:element name="ModeID" type="c_S_20" minOccurs="0" />
+                <xs:element name="PowerLimit" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PowerType" type="c_ListCPT" minOccurs="0" />
+               <xs:element name="ConfigAnt" type="ConfigAnt" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ConfigFreq">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Priority" type="c_ListCPS" minOccurs="0" />
+                <xs:element name="Duration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ChannelSpacing" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PulseWidth" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ConfigFreqUse" type="c_ListUFU" minOccurs="0" />
+                <xs:element name="OOBJustification" type="c_MEMO" minOccurs="0" />
+                <xs:element name="JamWatchPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="SortNum" type="c_UN_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Usage">
+           <xs:sequence>
+                <xs:element name="EqpFnct" type="c_ListCEF" minOccurs="0" />
+                <xs:element name="StnClass" type="c_ListUSC" minOccurs="0" />
+                <xs:element name="RadioService" type="c_ListCSN" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ConfigEmission">
+           <xs:sequence>
+                <xs:element name="EmsClass" type="c_EMSCLASS" minOccurs="0" />
+                <xs:element name="NecessaryBandwidthMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NecessaryBandwidthMax" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="CrossSectionRange">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListURS" minOccurs="0" />
+                <xs:element name="Wavelength" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="EffectiveArea" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="DetectionRange" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="AcquisitionRange" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="TrackingRange" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="EngagementRange" type="c_UN_9_4" minOccurs="0" />
+                <xs:element name="Calculated" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="EndpointLocation">
+           <xs:sequence>
+                <xs:element name="AntennaHeight" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="LocSatRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="MinPointAngle" type="c_SN_6_3_180" minOccurs="0" />
+                <xs:element name="SiteElevation" type="c_SN_7_2" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TrunkingAssignment">
+           <xs:sequence>
+                <xs:element name="AgencySerialNum" type="c_S_20" minOccurs="0" />
+                <xs:element name="AssignmentRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="IsRelinquished" type="c_ListCBO" />
+                <xs:element name="RelinquishmentDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AllotEmission">
+           <xs:sequence>
+                <xs:element name="NecessaryBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="EmsClass" type="c_EMSCLASS" minOccurs="0" />
+                <xs:element name="Power" type="c_SN_10_7" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AllotFreq">
+           <xs:sequence>
+               <xs:attribute name="locations" type="c_INDEX_LIST" />
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PairedFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="ChannelName" type="c_S_10" minOccurs="0" />
+                <xs:element name="TuningStep" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AllotChannel">
+           <xs:sequence>
+               <xs:attribute name="locations" type="c_INDEX_LIST" />
+                <xs:element name="ChannelName" type="c_S_10" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="EqpNomenclature">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListCTO" minOccurs="0" />
+                <xs:element name="Name" type="c_S_20" minOccurs="0" />
+                <xs:element name="Manufacturer" type="c_ListUMF" minOccurs="0" />
+                <xs:element name="CertPrefix" type="c_ListUEC" minOccurs="0" />
+                <xs:element name="CertNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="CertRevNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="OffTheShelf" type="c_S_10" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AntDetails">
+           <xs:sequence>
+                <xs:element name="AntDetailsID" type="c_S_100" />
+                <xs:element name="AntRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="ModeIDRef" type="c_S_20" minOccurs="0" />
+                <xs:element name="AntPatternRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="Name" type="c_S_100" minOccurs="0" />
+                <xs:element name="NameType" type="c_ListCTO" minOccurs="0" />
+                <xs:element name="Manufacturer" type="c_ListUMF" minOccurs="0" />
+                <xs:element name="AntType" type="c_ListCAT" minOccurs="0" />
+                <xs:element name="Gain" type="c_SN_6_3" minOccurs="0" />
+                <xs:element name="PolarisationType" type="c_ListCPO" minOccurs="0" />
+                <xs:element name="PolarisationAngle" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="HorzBeamwidth" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="VertBeamwidth" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MotionType" type="c_ListCAD" minOccurs="0" />
+                <xs:element name="PointingAzMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="PointingAzMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="PointingAzType" type="c_ListCPA" minOccurs="0" />
+                <xs:element name="PointingElev" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="StructureHeight" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="FeedlineLoss" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="SpaceStnNoiseTemp" type="c_UN_10_4" minOccurs="0" />
+                <xs:element name="EarthStnNoiseTemp" type="c_UN_10_4" minOccurs="0" />
+                <xs:element name="EquivLinktNoiseTemp" type="c_UN_10_4" minOccurs="0" />
+               <xs:element name="Blanking" type="Blanking" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="RequestedFreq">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="AsgnFreq">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RefFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Excluded" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="TAD" type="c_S_5" minOccurs="0" />
+                <xs:element name="Quality" type="c_UN_6" minOccurs="0" />
+                <xs:element name="LegacyNum" type="c_S_20" minOccurs="0" />
+                <xs:element name="ProtectionCode" type="c_ListCPC" minOccurs="0" />
+                <xs:element name="Priority" type="c_S_5" minOccurs="0" />
+                <xs:element name="ITURegStatus" type="c_ListCIR" minOccurs="0" />
+                <xs:element name="ITURegDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="ITURegNum" type="c_S_10" minOccurs="0" />
+                <xs:element name="ITURegComment" type="c_S_20" minOccurs="0" />
+               <xs:element name="FreqOld" type="FreqOld" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="NarrowBandPlan" type="NarrowBandPlan" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="PairedFreq" type="PairedFreq" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Channel">
+           <xs:sequence>
+                <xs:element name="ChannelName" type="c_S_10" />
+                <xs:element name="TAD" type="c_S_5" minOccurs="0" />
+                <xs:element name="Quality" type="c_UN_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="StationRef">
+           <xs:sequence>
+                <xs:element name="StationIDRef" type="c_S_100" />
+                <xs:element name="Type" type="c_ListCAU" minOccurs="0" />
+                <xs:element name="EmissionIDRef" type="c_S_100" minOccurs="0" />
+                <xs:element name="TxAntDetailsIDRef" type="c_S_100" minOccurs="0" />
+                <xs:element name="RxAntDetailsIDRef" type="c_S_100" minOccurs="0" />
+                <xs:element name="PulseIDRef" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="DetailedFunction">
+           <xs:sequence>
+                <xs:element name="Function" type="c_ListCFN" minOccurs="0" />
+                <xs:element name="Priority" type="c_S_10" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="OperatingSchedule">
+           <xs:sequence>
+                <xs:element name="Months" type="c_S_50" minOccurs="0" />
+                <xs:element name="DaysOfMonth" type="c_S_100" minOccurs="0" />
+                <xs:element name="DaysOfWeek" type="c_S_20" minOccurs="0" />
+                <xs:element name="Hours" type="c_S_100" minOccurs="0" />
+                <xs:element name="Minutes" type="c_S_100" minOccurs="0" />
+                <xs:element name="Years" type="c_S_50" minOccurs="0" />
+                <xs:element name="Actual" type="c_ListCBO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="LocationRef">
+           <xs:sequence>
+                <xs:element name="Serial" type="c_SERIAL" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="NotationTimeline">
+           <xs:sequence>
+                <xs:element name="Status" type="c_ListUNT" minOccurs="0" />
+                <xs:element name="ChangeDateTime" type="c_DATETIME_UTC" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PotentialVictims">
+           <xs:sequence>
+                <xs:element name="VictimNotation" type="c_S_20" minOccurs="0" />
+                <xs:element name="Type" type="c_ListUEN" minOccurs="0" />
+                <xs:element name="VictimName" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="UsingCountries">
+           <xs:sequence>
+                <xs:element name="Country" type="c_ListCAO" />
+                <xs:element name="CountryRole" type="c_ListUS2" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedERPAnalysis">
+           <xs:sequence>
+                <xs:element name="Continuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="ERPActualMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPActualMin" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPAdaptiveDriverDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="ERPAdaptiveRuleDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="ERPChangeRate" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPExtremeMax" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPExtremeMin" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPMean" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPPatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ERPPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="ERPSequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="ERPStdDev" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="ERPStep" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="NumObsPositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumObsValues" type="c_UN_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedMOPAnalysis">
+           <xs:sequence>
+                <xs:element name="MOPAdaptiveDriverDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="MOPAMPercentModulation" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="MOPChangeRateAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPChangeRateCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPChangeRateFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPChangeRatePM" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="MOPContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="MOPID" type="c_S_10" minOccurs="0" />
+                <xs:element name="MOPMeanValueAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPMeanValueCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPMeanValueFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPMeanValuePM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MOPNumElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MOPOffTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPOnTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPPatternName" type="c_S_50" minOccurs="0" />
+                <xs:element name="MOPPatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="MOPPulseDurationLink" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPTimeBandwidthProduct" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="MOPType" type="c_ListUSX" minOccurs="0" />
+                <xs:element name="MOPValueMaxAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPValueMaxCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPValueMaxFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPValueMaxPM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MOPValueMinAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPValueMinCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPValueMinFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPValueMinPM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="SignalType" type="c_ListCMO" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedERPAnalysis">
+           <xs:sequence>
+                <xs:element name="ERPDwell" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedMOPAnalysis">
+           <xs:sequence>
+                <xs:element name="MOPDutyCycle" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedPulseAnalysis">
+           <xs:sequence>
+                <xs:element name="NumPDPositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumPDValues" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PDAdaptiveRuleDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="PDContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="PDDwellMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDDwellMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDExtremeMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDExtremeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDMean" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDMedian" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDPatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="PDSequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="PDStdDev" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDStep" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDTypicalMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PDTypicalMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="FallTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RiseTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRFChangeRate" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRFExtremeMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PRFExtremeMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PRFMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PRFMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PRFTypicalMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PRFTypicalMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="NumPRIElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumPRIPositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PRIAdaptiveDriverDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="PRIAdaptiveRuleDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="PRIAnomalousValues" type="c_S_500" minOccurs="0" />
+                <xs:element name="PRIBasicClockPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIChangeRate" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="PRICountdown" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PRICountdownKey" type="c_UN_9" minOccurs="0" />
+                <xs:element name="PRIExtremeMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIExtremeMin" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIFramePeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIFrameRate" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PRIGroupPulseSpacing" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIGroupSpacing" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIMean" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIMedianCountdowns" type="c_S_100" minOccurs="0" />
+                <xs:element name="PRIPatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="PRIPulsesPerGroup" type="c_UN_6" minOccurs="0" />
+                <xs:element name="PRISequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="PRIStability" type="c_UN_18_6" minOccurs="0" />
+                <xs:element name="PRIStabilitySamplePeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIStdDev" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRIStep" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRISubframePeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRISubframeRate" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PRITimingShift" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRITypicalMax" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="PRITypicalMin" type="c_UN_12_6" minOccurs="0" />
+               <xs:element name="ObservedPulseValues" type="ObservedPulseValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedRFAnalysis">
+           <xs:sequence>
+                <xs:element name="ChipRate" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="DwellTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="GuardBand" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantRFBandwidth03" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantRFBandwidth06" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantRFBandwidth10" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="InstantRFBandwidth20" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="NumRFChannels" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumRFElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumRFPositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumRFSimultaneous" type="c_UN_6" minOccurs="0" />
+                <xs:element name="OperationalRFBandwidth" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFAdaptiveDriver" type="c_S_500" minOccurs="0" />
+                <xs:element name="RFAdaptiveRule" type="c_S_500" minOccurs="0" />
+                <xs:element name="RFBasicClockPeriod" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFChangeRate" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFChannelFreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFChannelFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFCoherent" type="c_ListUSY" minOccurs="0" />
+                <xs:element name="RFContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="RFFreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFFreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFFreqTolerance" type="c_UN_18_6" minOccurs="0" />
+                <xs:element name="RFFreqToleranceInterval" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RFFreqToleranceUnit" type="c_ListUFO" minOccurs="0" />
+                <xs:element name="RFMean" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFMedian" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFPatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RFPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="RFRestFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFSequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="RFSlotDuration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="RFStandardDeviation" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="RFTuningStep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="TuningStep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+               <xs:element name="ObservedRFValues" type="ObservedRFValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedLobeAnalysis">
+           <xs:sequence>
+                <xs:element name="BeamType" type="c_ListUBD" minOccurs="0" />
+                <xs:element name="LobeSymmetric" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="LobeID" type="c_S_10" />
+                <xs:element name="LobeName" type="c_S_25" minOccurs="0" />
+               <xs:element name="ObservedLobeValues" type="ObservedLobeValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedPolarisationAnalysis">
+           <xs:sequence>
+                <xs:element name="AxialRatio" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="PolarisationDirection" type="c_ListURD" minOccurs="0" />
+                <xs:element name="PolarisationRotationRate" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="PolarisationSense" type="c_ListURD" minOccurs="0" />
+                <xs:element name="PolarisationType" type="c_ListCPO" minOccurs="0" />
+                <xs:element name="NumTiltAngleElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumTiltAnglePositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="TiltAngleAdaptiveDriverDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="TiltAngleContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="TiltAngleDuration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="TiltAngleExtremeMax" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleExtremeMin" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleMean" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleMedian" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAnglePatternPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="TiltAnglePatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="TiltAngleRangeMax" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleRangeMin" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleRate" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="TiltAngleSequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="TiltAngleStdDev" type="c_UN_6_3_90" minOccurs="0" />
+                <xs:element name="TiltAngleStep" type="c_UN_6_3_90" minOccurs="0" />
+               <xs:element name="ObservedPolarisationValues" type="ObservedPolarisationValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedScanAnalysis">
+           <xs:sequence>
+                <xs:element name=":ScansHorzContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="AzBoresightAngle" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="NumBeamPositionsPerScan" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumBeamPositionsTotal" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumBeamsPerRaster" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumRastersPerCycle" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumScanPositions" type="c_UN_6" minOccurs="0" />
+                <xs:element name="NumScanValues" type="c_UN_6" minOccurs="0" />
+                <xs:element name="ScanAdaptiveDriverDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="ScanAdaptiveRuleDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="ScanDwell" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ScanDwellSequence" type="c_S_500" minOccurs="0" />
+                <xs:element name="ScanDwellTime" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ScanElevContinuous" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="ScanPatternType" type="c_ListUS7" minOccurs="0" />
+                <xs:element name="ScanType" type="c_ListUS8" minOccurs="0" />
+                <xs:element name="AzScanChangeRate" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="AzScanRateExtremeMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="AzScanRateExtremeMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="AzScanRateMean" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="AzScanRateMedian" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="AzScanSector" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="AzScanSectorMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="AzScanVelocity" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ScanAngleAzStart" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="ScanAngleAzStop" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="ElevScanChangeRate" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ElevScanRateExtremeMax" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ElevScanRateExtremeMin" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ElevScanRateMean" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ElevScanSector" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="ElevScanSectorMax" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="ElevScanVelocity" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="ScanAngleElevStart" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="ScanAngleElevStop" type="c_SN_6_3_90" minOccurs="0" />
+               <xs:element name="ObservedScanValues" type="ObservedScanValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TimingDeconflictionProtocol">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_50" minOccurs="0" />
+                <xs:element name="Description" type="c_MEMO" minOccurs="0" />
+                <xs:element name="Required" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="Ranking" type="c_ListUTM" minOccurs="0" />
+                <xs:element name="TriggerOn" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="TriggerOff" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="SyncMethod" type="c_MEMO" minOccurs="0" />
+                <xs:element name="Period" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JammingTarget">
+           <xs:sequence>
+                <xs:element name="TargetID" type="c_UN_6" minOccurs="0" />
+                <xs:element name="LoadsetRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Power" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="PolarisationType" type="c_ListCPO" minOccurs="0" />
+                <xs:element name="Lon" type="c_LONGITUDE" minOccurs="0" />
+                <xs:element name="Lat" type="c_LATITUDE" minOccurs="0" />
+                <xs:element name="LocationRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="Bearing" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="AntStabilisation" type="c_ListUWG" minOccurs="0" />
+               <xs:element name="JammingPerformance" type="JammingPerformance" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Net">
+           <xs:sequence>
+                <xs:element name="NetID" type="c_S_50" />
+                <xs:element name="LineNum" type="c_S_5" />
+                <xs:element name="NetName" type="c_S_25" />
+                <xs:element name="CallSign" type="c_S_20" />
+                <xs:element name="GroupName" type="c_S_100" minOccurs="0" />
+                <xs:element name="MissionPriority" type="c_UN_6" minOccurs="0" />
+                <xs:element name="RestoralPriority" type="c_S_5" minOccurs="0" />
+                <xs:element name="ColorWord" type="c_S_20" minOccurs="0" />
+                <xs:element name="ColorNum" type="c_UN_6" minOccurs="0" />
+                <xs:element name="TAD" type="c_S_5" minOccurs="0" />
+                <xs:element name="ComSecKeyMat" type="c_S_15" minOccurs="0" />
+                <xs:element name="Shared" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="NetGuard" type="c_ListUGR" minOccurs="0" />
+                <xs:element name="CktLineGrp" type="c_S_15" minOccurs="0" />
+                <xs:element name="SpecInstructions" type="c_S_100" minOccurs="0" />
+                <xs:element name="NetNotes" type="c_S_5" minOccurs="0" />
+               <xs:element name="NetFrequency" type="NetFrequency" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="TacUnit" type="TacUnit" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="GuardOrg" type="GuardOrg" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+               <xs:element name="TBA" type="TBA" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Suffix">
+           <xs:sequence>
+                <xs:element name="SuffixCode" type="c_S_5" />
+                <xs:element name="Name" type="c_S_25" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Expander">
+           <xs:sequence>
+                <xs:element name="Function" type="c_S_25" />
+                <xs:element name="Expander" type="c_S_5" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Password">
+           <xs:sequence>
+                <xs:element name="Sign" type="c_S_20" />
+                <xs:element name="CounterSign" type="c_S_20" />
+                <xs:element name="AltSign" type="c_S_20" minOccurs="0" />
+                <xs:element name="AltSignInstr" type="c_S_250" minOccurs="0" />
+                <xs:element name="RunningSign" type="c_S_20" minOccurs="0" />
+                <xs:element name="RunningSignInstr" type="c_S_250" minOccurs="0" />
+                <xs:element name="ChangeTime" type="c_S_25" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TacSat">
+           <xs:sequence>
+                <xs:element name="SatName" type="c_S_100" minOccurs="0" />
+                <xs:element name="SatLon" type="c_S_10" minOccurs="0" />
+                <xs:element name="Channel" type="c_S_10" minOccurs="0" />
+                <xs:element name="GuardAddress" type="c_S_25" minOccurs="0" />
+                <xs:element name="RTOChannel" type="c_S_25" minOccurs="0" />
+                <xs:element name="PointingElevMin" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="PointingElevMax" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="PointingAzMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="PointingAzMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="UplinkFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="DownlinkFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="CryptoName" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Smoke">
+           <xs:sequence>
+                <xs:element name="Color" type="c_ListUSM" />
+                <xs:element name="Meaning" type="c_ListUSD" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Pyrotechnics">
+           <xs:sequence>
+                <xs:element name="Type" type="c_ListUPY" />
+                <xs:element name="Meaning" type="c_ListUPD" />
+          </xs:sequence>
+      </xs:complexType>
+
+
+      <xs:complexType name="StnClass">
+           <xs:sequence>
+                <xs:element name="StnClassCode" type="c_ListUSC" />
+                <xs:element name="Source" type="c_ListUSW" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="SubcarrierTone">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="Duration" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="Name" type="c_S_10" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ConfigAnt">
+           <xs:sequence>
+                <xs:element name="Serial" type="c_SERIAL" />
+                <xs:element name="ModeID" type="c_S_20" minOccurs="0" />
+                <xs:element name="Mount" type="c_S_20" minOccurs="0" />
+                <xs:element name="SpectralPowerDensity" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="FeedlineLoss" type="c_UN_6_3" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="Blanking">
+           <xs:sequence>
+                <xs:element name="AzStart" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="AzStop" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="ElevStart" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="ElevStop" type="c_SN_6_3_90" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="FreqOld">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="NarrowBandPlan">
+           <xs:sequence>
+                <xs:element name="ChangeDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="NarrowBandFreq" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PairedFreq">
+           <xs:sequence>
+                <xs:element name="Freq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PairedASN" type="c_S_10" minOccurs="0" />
+                <xs:element name="AsgnRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="PairedType" type="c_ListUPU" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedERPValues">
+           <xs:sequence>
+                <xs:element name="ERPDwell" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ERPValue" type="c_SN_10_7" minOccurs="0" />
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedMOPSweep">
+           <xs:sequence>
+                <xs:element name="MOPDutyCycle" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="MOPNumElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MOPStepAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPStepFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepPM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MOPFlyBackInterval" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPSweepPeriod" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPRepetionInterval" type="c_UN_12_6" minOccurs="0" />
+               <xs:element name="ObservedMOPSequence" type="ObservedMOPSequence" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedPulseValues">
+           <xs:sequence>
+                <xs:element name="ObservedPDValue" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="ObservedPRFValue" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedRFValues">
+           <xs:sequence>
+                <xs:element name="RFValue" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedLobeValues">
+           <xs:sequence>
+                <xs:element name="HorzBeamwidthMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="HorzBeamwidthMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="LobeValueAngleAccuracy" type="c_SN_6_3_90" minOccurs="0" />
+                <xs:element name="LobeValueAngleHorz" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="LobeValueAngleVert" type="c_SN_6_3_180" minOccurs="0" />
+                <xs:element name="LobeValueLevel" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="LobeValueLevelAccuracy" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="VertBeamwidthMax" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="VertBeamwidthMin" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="LobeValueID" type="c_S_10" />
+                <xs:element name="LobeValueName" type="c_S_25" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedPolarisationValues">
+           <xs:sequence>
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="TiltAngleValue" type="c_SN_6_3_90" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedScanValues">
+           <xs:sequence>
+                <xs:element name="ScanValue" type="c_UN_7_2" minOccurs="0" />
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="JammingPerformance">
+           <xs:sequence>
+                <xs:element name="ContinuousUpdate" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="DesiredEffect" type="c_ListUWA" minOccurs="0" />
+                <xs:element name="ActualEffect" type="c_ListUWA" minOccurs="0" />
+                <xs:element name="DesiredPerformance" type="c_ListUWB" minOccurs="0" />
+                <xs:element name="ActualPerformance" type="c_ListUWB" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="NetFrequency">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_50" minOccurs="0" />
+                <xs:element name="Description" type="c_S_500" minOccurs="0" />
+                <xs:element name="ProtectionCode" type="c_ListCPC" minOccurs="0" />
+                <xs:element name="Priority" type="c_S_5" minOccurs="0" />
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="DesiredSep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="MinSep" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="SincgarsCueFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="SincgarsManualFreq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PushNum" type="c_S_5" minOccurs="0" />
+                <xs:element name="Shared" type="c_ListCBO" minOccurs="0" />
+                <xs:element name="CheckSum" type="c_UN_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TacUnit">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_50" />
+                <xs:element name="OrgCode" type="c_S_5" />
+                <xs:element name="CallWord" type="c_S_20" minOccurs="0" />
+                <xs:element name="SuffixCode" type="c_S_5" />
+                <xs:element name="Expander" type="c_S_5" minOccurs="0" />
+                <xs:element name="PositionName" type="c_S_50" minOccurs="0" />
+                <xs:element name="CktRestorePriority" type="c_S_5" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="GuardOrg">
+           <xs:sequence>
+                <xs:element name="GuardOrgName" type="c_S_50" minOccurs="0" />
+                <xs:element name="GuardOrgUIC" type="c_S_50" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="TBA">
+           <xs:sequence>
+                <xs:element name="Name" type="c_S_25" />
+                <xs:element name="TBAAddress" type="c_S_25" minOccurs="0" />
+                <xs:element name="Precedence" type="c_ListUBP" minOccurs="0" />
+                <xs:element name="Description" type="c_S_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+
+      <xs:complexType name="FreqOld">
+           <xs:sequence>
+                <xs:element name="FreqMin" type="c_UN_16_9" />
+                <xs:element name="FreqMax" type="c_UN_16_9" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="NarrowBandPlan">
+           <xs:sequence>
+                <xs:element name="ChangeDate" type="c_DATE_YYYY-MM-DD" minOccurs="0" />
+                <xs:element name="NarrowBandFreq" type="c_UN_12_6" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="PairedFreq">
+           <xs:sequence>
+                <xs:element name="Freq" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="PairedASN" type="c_S_10" minOccurs="0" />
+                <xs:element name="AsgnRef" type="c_SERIAL" minOccurs="0" />
+                <xs:element name="PairedType" type="c_ListUPU" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+      <xs:complexType name="ObservedMOPSequence">
+           <xs:sequence>
+                <xs:element name="MOPDutyCycle" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="MOPNumElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MOPStepAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPStepFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepPM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="SequenceBitLength" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MOPSequenceDescr" type="c_S_500" minOccurs="0" />
+                <xs:element name="MOPRepetionInterval" type="c_UN_12_6" minOccurs="0" />
+               <xs:element name="ObservedMOPBits" type="ObservedMOPBits" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+
+      <xs:complexType name="ObservedMOPBits">
+           <xs:sequence>
+                <xs:element name="MOPDutyCycle" type="c_UN_6_3_100" minOccurs="0" />
+                <xs:element name="MOPNumElements" type="c_UN_6" minOccurs="0" />
+                <xs:element name="MOPStepAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPStepFM" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepCW" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="MOPStepPM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="MOPRepetionInterval" type="c_UN_12_6" minOccurs="0" />
+                <xs:element name="BitRate" type="c_UN_12_3" minOccurs="0" />
+                <xs:element name="BitDuration" type="c_UN_12_6" minOccurs="0" />
+               <xs:element name="ObservedMOPValues" type="ObservedMOPValues" minOccurs="0" maxOccurs="unbounded" ></xs:element>
+          </xs:sequence>
+      </xs:complexType>
+
+
+      <xs:complexType name="ObservedMOPValues">
+           <xs:sequence>
+                <xs:element name="MOPValueAM" type="c_UN_6_3" minOccurs="0" />
+                <xs:element name="MOPValueCW" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="MOPValueFM" type="c_UN_16_9" minOccurs="0" />
+                <xs:element name="MOPValuePM" type="c_UN_6_3_360" minOccurs="0" />
+                <xs:element name="StatisticalIndicator" type="c_UN_6_3_100" minOccurs="0" />
+          </xs:sequence>
+      </xs:complexType>
+
+     <xs:element name="SSRF" type="SSRF" />
+</xs:schema>
